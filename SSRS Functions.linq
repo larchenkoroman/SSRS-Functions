@@ -1,5 +1,6 @@
 <Query Kind="VBProgram">
   <Namespace>Microsoft.VisualBasic</Namespace>
+  <RuntimeVersion>6.0</RuntimeVersion>
 </Query>
 
 Sub Main
