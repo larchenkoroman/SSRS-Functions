@@ -13,5 +13,5 @@ Function YearStringFromTwoDates(DateFrom As Date, DateTo As Date) As String
   Year1 = Year(DateFrom)
   Year2 = Year(DateTo)
 
-  Return IIf(Year1 = Year2, Year1, Year1 & " - " & Year2) & " год"
+  Return IIf(Year1 = Year2, CStr(Year1), Year1 & " - " & Year2) & " год"
 End Function
