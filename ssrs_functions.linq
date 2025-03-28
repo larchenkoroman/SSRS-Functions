@@ -6,12 +6,13 @@ Sub Main
   Dim TimeInSeconds As Integer = 3659
   Console.WriteLine(TimeStringFromSeconds(TimeInSeconds))
   Console.WriteLine(TimeStringFromSeconds(TimeInSeconds, ":", ":", ""))
-  
+
   Console.WriteLine()
   Console.WriteLine(Now)
   Console.WriteLine(SetTimeToDate(Now))
 End Sub
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Function TimeStringFromSeconds(TimeInSecond As Integer, _
                                Optional HoursSymbol As String = " ч. ", _
                                Optional MinutesSymbol As String = " мин. ", _
@@ -28,13 +29,11 @@ Function TimeStringFromSeconds(TimeInSecond As Integer, _
        & Format(Seconds, "00") & SecondsSymbol
 End Function
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Function SetTimeToDate(dt As DateTime, _
                        Optional hours As Integer = 23, _
                        Optional minutes As Integer = 59, _
                        Optional seconds As Integer = 59) As DateTime
-  Dim year As Integer = dt.Year
-  Dim month As Integer = dt.Month
-  Dim day As Integer = dt.Day
   
-  Return New DateTime(year, month, day, hours, minutes, seconds)
+  Return New DateTime(dt.Year, dt.Month, dt.Day, hours, minutes, seconds)
 End Function
