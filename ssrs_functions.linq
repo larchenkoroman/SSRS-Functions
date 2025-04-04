@@ -10,6 +10,8 @@ Sub Main
   Console.WriteLine()
   Console.WriteLine(Now)
   Console.WriteLine(SetTimeToDate(Now))
+
+  Console.WriteLine(StrNullIf("<null>,1,2"))
 End Sub
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -36,4 +38,9 @@ Function SetTimeToDate(dt As DateTime, _
                        Optional seconds As Integer = 59) As DateTime
   
   Return New DateTime(dt.Year, dt.Month, dt.Day, hours, minutes, seconds)
+End Function
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Function StrNullIf(source As String, Optional nullString As String = "<null>") As Object
+  Return iif(source.Contains(nullString), Nothing, source)
 End Function
