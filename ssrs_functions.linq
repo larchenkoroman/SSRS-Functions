@@ -3,17 +3,13 @@
 </Query>
 
 Sub Main
-  Dim TimeInSeconds As Integer = 3659
-  Console.WriteLine(TimeStringFromSeconds(TimeInSeconds))
-  Console.WriteLine(TimeStringFromSeconds(TimeInSeconds, ":", ":", ""))
-
-  Console.WriteLine()
-  Console.WriteLine(Now)
-  Console.WriteLine(SetTimeToDate(Now))
-
   Console.WriteLine(StrNullIf("<null>,1,2"))
 End Sub
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'  Dim TimeInSeconds As Integer = 3659
+'  TimeStringFromSeconds(TimeInSeconds)
+'  TimeStringFromSeconds(TimeInSeconds, ":", ":", "")
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Function TimeStringFromSeconds(TimeInSecond As Integer, _
                                Optional HoursSymbol As String = " ч. ", _
@@ -32,6 +28,8 @@ Function TimeStringFromSeconds(TimeInSecond As Integer, _
 End Function
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' SetTimeToDate(Now)
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Function SetTimeToDate(dt As DateTime, _
                        Optional hours As Integer = 23, _
                        Optional minutes As Integer = 59, _
@@ -40,6 +38,8 @@ Function SetTimeToDate(dt As DateTime, _
   Return New DateTime(dt.Year, dt.Month, dt.Day, hours, minutes, seconds)
 End Function
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' StrNullIf("<null>,1,2")
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Function StrNullIf(source As String, Optional nullString As String = "<null>") As Object
   Return iif(source.Contains(nullString), Nothing, source)
