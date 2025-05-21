@@ -4,6 +4,7 @@
 
 Sub Main
   Console.WriteLine(SetTimeToDate(Now))
+  Console.WriteLine(DateStrip(Now))
 End Sub
 
 Function SetTimeToDate(dt As DateTime, _
@@ -14,3 +15,7 @@ Function SetTimeToDate(dt As DateTime, _
   Return New DateTime(dt.Year, dt.Month, dt.Day, hours, minutes, seconds)
 End Function
 
+
+Function DateStrip(dt As DateTime) As DateTime
+  Return New DateTime(dt.Year, dt.Month, dt.Day)
+End Function
