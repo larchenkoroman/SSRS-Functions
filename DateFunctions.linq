@@ -3,15 +3,12 @@
 </Query>
 
 Sub Main
-  Console.WriteLine(SetTimeToDate(Now))
+  Console.WriteLine(SetTimeToDate(Now, 23, 59, 59))
   Console.WriteLine(DateStrip(Now))
+  'Console.WriteLine(Weekday(Today, FirstDayOfWeek.Monday))
 End Sub
 
-Function SetTimeToDate(dt As DateTime, _
-                       Optional hours As Integer = 23, _
-                       Optional minutes As Integer = 59, _
-                       Optional seconds As Integer = 59) As DateTime
-
+Function SetTimeToDate(dt As DateTime, hours As Integer, minutes As Integer, seconds As Integer) As DateTime
   Return New DateTime(dt.Year, dt.Month, dt.Day, hours, minutes, seconds)
 End Function
 
