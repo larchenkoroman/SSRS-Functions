@@ -43,19 +43,19 @@ end;
 procedure CreateDateMemo(ColIndex:Integer; ColText: string; ParentHeader: TfrxBand);
 var
   StartLeft, StartTop, ColWidth: Extended;
-  md1: TfrxMemoView;  
+  dateMemo: TfrxMemoView;  
 begin
-  ColWidth := Memo44.Width;//45;
+  ColWidth := Memo44.Width;
   StartLeft := Memo21.Left + (ColIndex - 1) * ColWidth;
   StartTop := Memo21.Top + Memo21.Height;
-md1 := TfrxMemoView.Create(ParentHeader);
-  md1.Name := ParentHeader.Name + '_MemoDate' + IntToStr(ColIndex);
-  md1.SetBounds(StartLeft, StartTop, ColWidth , Memo20.Height - Memo21.Height);
-  md1.Text := ColText;
-  md1.Frame := Memo21.Frame;
-  md1.Rotation := 90;
-  md1.HAlign := haCenter;
-  md1.VAlign := vaCenter;
+  dateMemo := TfrxMemoView.Create(ParentHeader);
+  dateMemo.Name := ParentHeader.Name + '_MemoDate' + IntToStr(ColIndex);
+  dateMemo.SetBounds(StartLeft, StartTop, ColWidth , Memo20.Height - Memo21.Height);
+  dateMemo.Text := ColText;
+  dateMemo.Frame := Memo21.Frame;
+  dateMemo.Rotation := 90;
+  dateMemo.HAlign := haCenter;
+  dateMemo.VAlign := vaCenter;
 end;
 
 procedure CreateDateMemos(Lo, Hi: Integer; ParentHeader: TfrxBand; Page: TfrxReportPage);
