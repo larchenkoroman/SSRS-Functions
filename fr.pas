@@ -8,9 +8,9 @@ begin
   aMemo.Font.Style := aMemo.Font.Style + fsBold + fsItalic;
 end;
 
-function MonthRusName(aMonth: Integer): string;
+function MonthRusName(dt: TDateTime): string;
 begin
-  case aMonth of
+  case MonthOf(dt) of
     1: Result := 'января';
     2: Result := 'февраля';
     3: Result := 'марта';
