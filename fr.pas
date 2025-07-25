@@ -40,22 +40,45 @@ end;
 -------------------------------------------------------------
 
 
+var
+  MaxDatesRn: Integer;
+
+function MonthRusName(dt: TDateTime): string;
+begin
+  case MonthOf(dt) of
+    1: Result := 'января';
+    2: Result := 'февраля';
+    3: Result := 'марта';
+    4: Result := 'апреля';
+    5: Result := 'мая';
+    6: Result := 'июня';
+    7: Result := 'июля';
+    8: Result := 'августа';
+    9: Result := 'сентября';
+    10: Result := 'октября';
+    11: Result := 'ноября';
+    12: Result := 'декабря';
+    else
+      Result := '';
+  end
+end;
+
 procedure CreateDateMemo(ColIndex:Integer; ColText: string; ParentHeader: TfrxBand);
 var
   StartLeft, StartTop, ColWidth: Extended;
-  dateMemo: TfrxMemoView;  
+  memoDate: TfrxMemoView;
 begin
-  ColWidth := Memo44.Width;
+  ColWidth := Memo44.Width;//45;
   StartLeft := Memo21.Left + (ColIndex - 1) * ColWidth;
   StartTop := Memo21.Top + Memo21.Height;
-  dateMemo := TfrxMemoView.Create(ParentHeader);
-  dateMemo.Name := ParentHeader.Name + '_MemoDate' + IntToStr(ColIndex);
-  dateMemo.SetBounds(StartLeft, StartTop, ColWidth , Memo20.Height - Memo21.Height);
-  dateMemo.Text := ColText;
-  dateMemo.Frame := Memo21.Frame;
-  dateMemo.Rotation := 90;
-  dateMemo.HAlign := haCenter;
-  dateMemo.VAlign := vaCenter;
+  memoDate := TfrxMemoView.Create(ParentHeader);
+  memoDate.Name := ParentHeader.Name + '_MemoDate' + IntToStr(ColIndex);
+  memoDate.SetBounds(StartLeft, StartTop, ColWidth , Memo20.Height - Memo21.Height);
+  memoDate.Text := ColText;
+  memoDate.Frame := Memo21.Frame;
+  memoDate.Rotation := 90;
+  memoDate.HAlign := haCenter;
+  memoDate.VAlign := vaCenter;
 end;
 
 procedure CreateDateMemos(Lo, Hi: Integer; ParentHeader: TfrxBand; Page: TfrxReportPage);
@@ -63,9 +86,15 @@ var
   i: Integer;
   str: string;
 begin
-  qDates.Filtered := False;
+  if MaxDatesRn < Lo then
+  begin
+    Page.Visible := False;
+    exit;
+  end;
+
   qDates.Filter := '(rn >= ' + IntToStr(Lo) + ') and (rn <= ' + IntToStr(Hi) + ')';
   qDates.Filtered := True;
+
   if qDates.Eof then
   begin
     qDates.Filtered := False;
@@ -91,7 +120,32 @@ begin
 end;
 
 
+procedure Memo317OnAfterData(Sender: TfrxComponent);
 begin
+  if Memo317.Text = '' then
+  begin
+    Memo317.Visible := false;
+    ReportTitle1.Height := ReportTitle1.Height - Memo317.Height;
+  end;
+end;
+
+procedure Memo318OnAfterData(Sender: TfrxComponent);
+begin
+  if Memo318.Text = '' then
+  begin
+    Memo318.Visible := false;
+    ReportTitle1.Height := ReportTitle1.Height - Memo318.Height;
+  end;
+end;
+
+begin
+  if not qDates.Active then
+    qDates.Open;
+
+  qDates.Last;
+  MaxDatesRn := qDates.FieldByName('rn').AsInteger;
+  qDates.First;
+
   CreateDateMemos(1, 15, Header1, Page1);
   CreateDateMemos(16, 30, Header2, Page2);
   CreateDateMemos(31, 45, Header3, Page3);
